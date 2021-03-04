@@ -21,6 +21,27 @@ app.get("/", function(req, res){
     })
 });
 
+io.sockets.on('connection', function(socket){
+    socket.on('newUser', function(name){
+        console.log(name + " joined the chatroom")
+        socket.name = name;
+        io.sockets.emit('update', {type : 'connect', name:'SERVER', message:name+' joined the chatroom'});
+    })
+
+    socket.on('message', function(data){
+        data.name = socket.name;
+        console.log(data);
+        socket.broadcast.emit('update', data);
+    });
+
+    socket.on('disconnect', function(){
+        console.log(socket.name + 'left chatroom');
+
+        socket.broadcast.emit('update', {type: 'disconnect', name:"SERVER", message: socket.name +" left chatroom."});
+    });
+});
+
+
 server.listen("8100", function(){
     console.log("alalalallal");
 });

@@ -5,10 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/index.css">
     <title>chatting</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/index.js"></script>
 </head>
 <body>
+    <div id="chat">
+
+    </div>
     <div id="main">
-        chatchatchat 
+        <input type="text" id="test">
+        <button onclick="send()">Send</button>
     </div>
 </body>
 </html>
